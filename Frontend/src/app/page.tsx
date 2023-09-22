@@ -1,18 +1,21 @@
-
+import { Button } from "@/components/ui/button"
 import 'tailwindcss/tailwind.css'
 
 export default function Home() {
   return (
   <>
   
-  <div className="container mx-auto mt-8">
-      <h1 className="text-4xl font-bold mb-4">Welcome to My Tailwind Next.js App</h1>
-      <p className="text-lg">Start building your awesome app with Next.js and Tailwind CSS!</p>
-    </div>
-    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-  Click Me
-</button>
-
+  <div className="container mx-auto mt-8 p-8">
+      <h1 className="text-4xl font-bold mb-4">Welcome to Gym Guardian</h1>
+      <p className="text-lg">Start building, tracking and recording all your workouts!</p>
+      
+  </div>
+  <div className="container mx-auto py-4 flex justify-evenly">
+    <Button size={'lg'}>Build New Workout</Button>
+    <Button size={'lg'}>View All Workouts</Button>
+  </div>
+    
+  
   </>
   )
 }
