@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
 import 'tailwindcss/tailwind.css'
+import Link from 'next/link'
 
 export default function Home() {
   return (
@@ -11,7 +12,10 @@ export default function Home() {
       
   </div>
   <div className="container mx-auto py-4 flex justify-evenly">
-    <Button size={'lg'}>Build New Workout</Button>
+    <Link href="/builder">
+      <Button size={'lg'}>Build New Workout</Button>
+    </Link>
+    
     <Button size={'lg'}>View All Workouts</Button>
   </div>
     
