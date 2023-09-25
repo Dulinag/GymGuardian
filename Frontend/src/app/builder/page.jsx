@@ -17,24 +17,35 @@ import {
     DialogTitle,
     DialogTrigger,
   } from "@/components/ui/dialog"
+  import Modal from '../../components/ui/builder/modal.jsx'
   
+
+  //seperate the state to make it leaner, look into useMemo
 
 function Builder() {
     const [state, setState] = React.useState({
         workoutData: Workouts,
         activeMuscleGroup: "",
-
+        setNumbers: 0
     })
+
+  
  
-    const setMuscleGroup = (group) => {
-        console.log(group)
-        
+    console.log(state)
+
+    const selectExercise = (group) => {
+
+
         setState({
             ...state,
             activeMuscleGroup: group
         })
     }
 
+
+      
+
+console.log(state.activeMuscleGroup)
 
   return (
     <div className='container mx-auto mt-8 p-8 h-auto w-full border border-black'>
@@ -44,7 +55,7 @@ function Builder() {
             {
                 state.workoutData.map((item) => {
                     return (
-                        <Dialog key={item.id} >
+                        <Dialog key={item.id}>
                         <Accordion 
                             type="single" 
                             collapsible
@@ -55,7 +66,7 @@ function Builder() {
                             {item.exercises.map((item) =>{
                                 return (
                                 <p key={item}>
-                                    <DialogTrigger className='hover hover:underline'>
+                                    <DialogTrigger className='hover hover:underline' onClick={() => selectExercise(item)} >
                                         {item}
                                     </DialogTrigger>
                                 </p>
@@ -63,15 +74,7 @@ function Builder() {
                                     
                                 )
                             })}
-                             <DialogContent>
-                                <DialogHeader>
-                                <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-                                <DialogDescription>
-                                    This action cannot be undone. This will permanently delete your account
-                                    and remove your data from our servers.
-                                </DialogDescription>
-                                </DialogHeader>
-                            </DialogContent>
+                            <Modal activeMuscleGroup={state.activeMuscleGroup}/>
                           </AccordionContent>
                         </AccordionItem>
                       </Accordion>
