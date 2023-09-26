@@ -18,7 +18,6 @@ import {
     DialogTrigger,
   } from "@/components/ui/dialog"
   import Modal from '../../components/ui/builder/modal.jsx'
-import Footer from '../../components/ui/footer.jsx'
   
 
   //seperate the state to make it leaner, look into useMemo
@@ -84,7 +83,7 @@ console.log(state.activeMuscleGroup)
                 })
             }
         </div>
-        {/* <Footer/> */}
+      
 
     </div>
 
