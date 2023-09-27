@@ -1,6 +1,6 @@
 // src/components/ScrollDownButton.tsx
 
-import React from 'react';
+// import React from 'react';
 
 const ScrollDownButton: React.FC = () => {
   const scrollToBottom = () => {

@@ -34,11 +34,11 @@ export default function Home() {
 
     </div>
     </div>
-    <div className='flex justify-center mt-20'>
+    {/* <div className='flex justify-center mt-20'>
         <Button size={'lg'}>        <ScrollDownButton />
 </Button>
 
-      </div>
+      </div> */}
 
     <br>
     </br>
