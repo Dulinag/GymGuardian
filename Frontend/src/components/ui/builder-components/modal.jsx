@@ -14,14 +14,12 @@ import {
 
 
 
-
 function Modal({activeMuscleGroup, onClose}) {
-   
     let [modalContent, setModalContent] = React.useState({
         setNumbers: 0,
         setInfo:[]
     })
-    console.log(modalContent)
+    
 
     const close = () => {
       
@@ -54,7 +52,7 @@ function Modal({activeMuscleGroup, onClose}) {
 
   return (
   
-    <DialogContent>
+    <DialogContent style={{backgroundColor:"white"}}>
         <DialogHeader className='m-5'>
             <DialogTitle >Set details for {activeMuscleGroup ? activeMuscleGroup : ""}</DialogTitle>
         </DialogHeader>
@@ -83,7 +81,10 @@ function Modal({activeMuscleGroup, onClose}) {
               
               :
             <>
+            <span>
               <p>Add more sets</p>
+            </span>
+              
             </>
               
       }

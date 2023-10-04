@@ -24,6 +24,7 @@ import {
 
 function Builder() {
   const workoutData = Workouts
+    const [isOpen, setIsOpen] = React.useState(false)
     const [state, setState] = React.useState({
         workoutData: null,
         activeMuscleGroup: null,
@@ -32,7 +33,7 @@ function Builder() {
 
   
  
-    console.log(state)
+    console.log(isOpen)
 
     const selectExercise = (group) => {
         setState({
@@ -64,11 +65,12 @@ function Builder() {
         <h1 className="text-4xl font-bold mb-4">Builder</h1>
         <p className="text-lg mb-5">Select a body part to begin</p>
         <div className='container flex justify-evenly mt-5 border border-black'>
+        <Dialog >
             {
                 workoutData.map((item) => {
                     return (
-                        <Dialog key={item.id}>
-                        <Accordion 
+                       
+                        <Accordion key={item.id}
                             type="single" 
                             collapsible
                         >
@@ -86,14 +88,19 @@ function Builder() {
                                     
                                 )
                             })}
+                      
                             <Modal activeMuscleGroup={state.activeMuscleGroup} onClose={checkModalState} />
+                         
+                            
                           </AccordionContent>
                         </AccordionItem>
                       </Accordion>
-                      </Dialog>
+                     
                     )
                 })
+                
             }
+             </Dialog>
         </div>
       
 
