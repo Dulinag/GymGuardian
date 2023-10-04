@@ -23,40 +23,54 @@ import {
   //seperate the state to make it leaner, look into useMemo
 
 function Builder() {
+  const workoutData = Workouts
+    const [isOpen, setIsOpen] = React.useState(false)
     const [state, setState] = React.useState({
-        workoutData: Workouts,
-        activeMuscleGroup: "",
-        setNumbers: 0
+        workoutData: null,
+        activeMuscleGroup: null,
+        updateOccurred: false
     })
 
   
  
-    console.log(state)
+    console.log(isOpen)
 
     const selectExercise = (group) => {
-
-
         setState({
             ...state,
-            activeMuscleGroup: group
+            activeMuscleGroup: group,
+            updateOccurred: false
         })
     }
 
+    const checkModalState = React.useCallback((data) => {
+      console.log(data, "modal")
+      setState({
+        ...state,
+        workoutData: data,
+        updateOccurred: true
+      });
+    }, []);
 
+//Im grabbing the state from my modal once I submit my changes, I need a useEffect to check that the workoutData 
+//has changed from my modal and store that state and render a table with the data.  The problem is 
+//getting the state submitted to persist even tho on each open of the modal I need to start fresh
+//my guess would be to add to seperate state using useEffect and have that data accumulate in a array of objects
       
 
-console.log(state.activeMuscleGroup)
+
 
   return (
     <div className='container mx-auto mt-8 p-8 h-auto w-full border border-black'>
         <h1 className="text-4xl font-bold mb-4">Builder</h1>
         <p className="text-lg mb-5">Select a body part to begin</p>
         <div className='container flex justify-evenly mt-5 border border-black'>
+        <Dialog >
             {
-                state.workoutData.map((item) => {
+                workoutData.map((item) => {
                     return (
-                        <Dialog key={item.id}>
-                        <Accordion 
+                       
+                        <Accordion key={item.id}
                             type="single" 
                             collapsible
                         >
@@ -74,14 +88,19 @@ console.log(state.activeMuscleGroup)
                                     
                                 )
                             })}
-                            <Modal activeMuscleGroup={state.activeMuscleGroup}/>
+                      
+                            <Modal activeMuscleGroup={state.activeMuscleGroup} onClose={checkModalState} />
+                         
+                            
                           </AccordionContent>
                         </AccordionItem>
                       </Accordion>
-                      </Dialog>
+                     
                     )
                 })
+                
             }
+             </Dialog>
         </div>
       
 
