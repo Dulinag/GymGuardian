@@ -1,24 +1,17 @@
 import React from 'react'
 import 'tailwindcss/tailwind.css'
-import {
-    DialogFooter,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-   
-  } from "@/components/ui/dialog"
-  import { Button } from "@/components/ui/button"
-  import { Input } from "@/components/ui/input"
-  import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 
-
-function Modal({activeMuscleGroup, onClose}) {
+function Table({activeState, onClose}) {
     let [modalContent, setModalContent] = React.useState({
         setNumbers: 0,
         setInfo:[]
     })
+
+    let {workoutData, activeMuscleGroup} = activeState
     
 
     const close = () => {
@@ -69,12 +62,12 @@ function Modal({activeMuscleGroup, onClose}) {
 
   return (
   
-    <DialogContent style={{backgroundColor:"white"}}>
-        <DialogHeader className='m-1.5'>
-            <DialogTitle >Set details for {activeMuscleGroup ? activeMuscleGroup : ""}</DialogTitle>
-        </DialogHeader>
+    <div style={{backgroundColor:"white"}}>
+        <header className='m-1.5'>
+            <title >Set details for {activeMuscleGroup ? activeMuscleGroup : ""}</title>
+        </header>
         
-        <DialogDescription>
+        <div>
         { 
         modalContent.setNumbers > 0 ?
       
@@ -111,19 +104,18 @@ function Modal({activeMuscleGroup, onClose}) {
               :
             <>
               Add sets
-              
             </>
               
       }
-        </DialogDescription>
+        </div>
         
-      <DialogFooter>
+      <footer>
         <Button onClick={addSetAmount}>Add Set</Button>
         <Button onClick={close}>Submit Working Set List</Button>
-      </DialogFooter>
-    </DialogContent>
+      </footer>
+    </div>
  
   )
 }
 
-export default Modal
+export default Table
