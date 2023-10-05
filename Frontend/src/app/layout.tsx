@@ -1,6 +1,13 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import image1 from "../images/gymname.png"
+import Image from 'next/image';
+import Rfooter from "../components/ui/footer"
+
+
+
+
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,8 +27,13 @@ export default function RootLayout({
       <body className={inter.className}>
       <header>This is our header</header>
         {children}
-      <footer>This is our footer</footer>
-      </body>
+              
+        <footer
+          className="block"
+          style={{ position: 'relative', top:0, bottom: 0, left: 0, right: 0 }}
+        >
+          <Rfooter />
+        </footer>     </body>
     
     </html>
   )
