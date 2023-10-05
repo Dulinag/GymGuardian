@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label"
 
 
 function Table({activeState, onClose}) {
-    let [modalContent, setModalContent] = React.useState({
+    let [exerciseBuilder, setexerciseBuilder] = React.useState({
         setNumbers: 0,
         setInfo:[]
     })

@@ -17,10 +17,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       
-      <body className={inter.className}>
-      <header>This is our header</header>
-        {children}
-      <footer>This is our footer</footer>
+      <body className={inter.className} suppressHydrationWarning={true}>
+        <header>This is our header</header>
+          {children}
+        <footer>This is our footer</footer>
       </body>
     
     </html>
