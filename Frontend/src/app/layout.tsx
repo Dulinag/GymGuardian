@@ -1,9 +1,10 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Rhodium_Libre } from 'next/font/google'
 import image1 from "../images/gymname.png"
 import Image from 'next/image';
 import Rfooter from "../components/ui/footer"
+import RHeader from '@/components/ui/header';
 
 
 
@@ -25,8 +26,12 @@ export default function RootLayout({
     <html lang="en">
       
       <body className={inter.className}>
-      <header>This is our header</header>
-        {children}
+      <header
+          className="block"
+          style={{ position: 'relative', top:0, bottom: 0, left: 0, right: 0 }}
+        >
+          <RHeader />
+        </header>            {children}
               
         <footer
           className="block"
