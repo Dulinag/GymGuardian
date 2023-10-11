@@ -4,30 +4,31 @@ import Image from 'next/image';
 
 function Rfooter() {
   return (
-    <div className='bg-blend-multiply'>
-
-      <div className="px-5 md:px-10">
-        <div className="mx-auto w-full max-w-[1200px]"> {/* Adjusted max width */}
-          <div className="py-8 md:py-10 lg:py-12"> {/* Adjusted padding */}
-            <div className="flex-col flex items-center">
-              <a href="#" className="mb-4 inline-block max-w-full text-black"> {/* Reduced margin here */}
-                <Image src={image1} alt="" className="inline-block max-w-full" style={{ maxHeight: '20rem' }} />
-              </a>
-              <div className="text-center font-semibold max-w-[991px] mx-auto py-1"> {/* Adjusted max width and centering */}
-                <a href="#" className="inline-block px-6 py-2 font-normal text-black transition hover:text-[#d6a701]">About</a>
-                <a href="#" className="inline-block px-6 py-2 font-normal text-black transition hover:text-[#d6a701]">Builder</a>
-                <a href="#" className="inline-block px-6 py-2 font-normal text-black transition hover:text-[#d6a701]">Workout videos</a>
-                <a href="#" className="inline-block px-6 py-2 font-normal text-black transition hover:text-[#d6a701]">Support</a>
-              </div>
-              <div className="mb-2 border-b-2 border-gray-400 w-36"> {/* Adjusted height */}
-              </div>
-             
-              <p className="max-w-[479px] mx-auto text-sm">© Copyright 2021. All rights reserved.</p> {/* Adjusted max width and centering */}
-            </div>
-          </div>
+    <section className="bg-black mt-30">
+      <div className="max-w-lg bg-black px-4 pt-24 py-8 mx-auto text-left md:max-w-none md:text-center">
+        <h1 className="text-3xl font-extrabold leading-10 tracking-tight text-left text-white text-center sm:leading-none md:text-6xl text-4xl lg:text-7xl">
+          <Image src={image1} alt="" className="inline-block max-w-full" style={{ maxHeight: '20rem' }} />
+        </h1>
+        <div className="mx-auto rounded-lg font-black mt-5 text-zinc-400 md:mt-12 md:max-w-lg text-center lg:text-lg">
+          <button className="bg-tkb border text-sm text-white py-3 px-7 rounded-full">
+            Join GYMGUARDIAN
+          </button>
         </div>
       </div>
-    </div>
+
+      <hr className="text-white mx-5" />
+
+      <div className="max-w-screen-xl px-4 pt-20 mx-auto sm:px-6 lg:px-8">
+        <div className="sm:flex sm:items-center sm:justify-between">
+          <div className="flex justify-center text-teal-300 sm:justify-start">
+            <img className="rounded-full" src="https://ih1.redbubble.net/image.3440946030.3036/raf,750x1000,075,t,101010:01c5ca27c6.jpg" width="40" height="40" />
+          </div>
+          <p className="mt-4 text-sm text-center text-gray-400 lg:text-right lg:mt-0">
+            T&C &nbsp; Career &nbsp; Privacy & Policy &nbsp; Developers
+          </p>
+        </div>
+      </div>
+    </section>
   );
 }
 

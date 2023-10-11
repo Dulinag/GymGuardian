@@ -27,7 +27,7 @@ export default function Workouts() {
     
     <Button size={'lg'}>View All Workouts</Button>
 
-<Link href = "/workouts">
+<Link href = "/videos">
     <Button size={'lg'}>View Our Workouts Video</Button>
 </Link>
 
