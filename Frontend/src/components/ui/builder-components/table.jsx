@@ -75,7 +75,7 @@ function Table({activeState, onClose}) {
             {
               modalContent.setInfo.map((item, i) => {
                 return(
-                  <span key={item.id} className='flex flex-wrap'>
+                  <span key={item.id} className='flex flex-wrap w-full'>
                     <p>Set Number: {item.id}</p>
                     <Label htmlFor="reps">Reps</Label>
                     <Input 
@@ -83,6 +83,7 @@ function Table({activeState, onClose}) {
                       id="reps" 
                       name="reps" 
                       min="0"
+                      className="w-1/5 p-2"
                       onChange={(e) => handleInputChange(e, i)}
                     >
                       </Input>
@@ -92,9 +93,11 @@ function Table({activeState, onClose}) {
                       id="weight" 
                       step="5"
                       min="0" 
-                      name="weight" 
+                      name="weight"
+                      className="w-1/4 p-2" 
                       onChange={(e) => handleInputChange(e, i)}
                     ></Input>
+                    
                   </span>
                 )
               })}

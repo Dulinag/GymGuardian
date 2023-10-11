@@ -24,7 +24,7 @@ function Builder() {
       activeMuscleGroup: null,
       exercises: null
   })
-  const [tableState, setTableState] = React.useState(null)
+  const [tableState, setTableState] = React.useState([])
   let [exerciseBuilder, setExerciseBuilder] = React.useState({
     setNumbers: 0,
     setInfo:[]
@@ -50,7 +50,7 @@ function Builder() {
       setInfo:[
         ...exerciseBuilder.setInfo,
         {
-          id: setAmount,
+          id: ++setAmount,
           exercise: state.activeMuscleGroup,
           reps: 0,
           weight: 0,
@@ -59,6 +59,23 @@ function Builder() {
       ]
     }
     setExerciseBuilder(modalState)
+  }
+
+  const removeSet = (item) => {
+    let {id} = item
+
+    let setInfo = exerciseBuilder.setInfo
+    let setAmount = exerciseBuilder.setNumbers -1
+    
+    
+    let newSetInfo = setInfo.filter((set) => set.id !== id)
+    let builderState = {
+      setNumbers: setAmount,
+      setInfo: newSetInfo
+    }
+
+    setExerciseBuilder(builderState)
+  
   }
 
   const handleInputChange = (e, index) => {
@@ -75,11 +92,25 @@ function Builder() {
 
   }
 
-    const addToTable = () => {
-      setTableState(workoutData)
-      console.log(workoutData)
-    }
-    console.log(exerciseBuilder)
+  const addToTable = (activeExercise) => {
+    
+    let {setInfo} = exerciseBuilder
+    console.log(setInfo)
+
+    let exerciseTable = [
+      ...tableState,
+      {
+        id: tableState.length,
+        exerciseName: activeExercise,
+        listOfExercises: setInfo
+      }
+    ]
+
+    setTableState(exerciseTable)
+    
+    
+  }
+    
 
 //Im grabbing the state from my modal once I submit my changes, I need a useEffect to check that the workoutData 
 //has changed from my modal and store that state and render a table with the data.  The problem is 
@@ -139,6 +170,7 @@ function Builder() {
         <span className='flex justify-evenly'>
           {state.activeMuscleGroup}
           <Button onClick={addSetAmount} size="sm">Add Set</Button>
+          <Button onClick={() => addToTable(state.activeMuscleGroup)} size="sm">Save to Workout</Button>
         </span>
         
         
@@ -147,7 +179,7 @@ function Builder() {
             exerciseBuilder.setInfo.map((item, i) => {
                 return(
                   <span key={item.id} className='flex flex-wrap'>
-                    <p>Set Number: {item.id}</p>
+                    <p>Set Number: {i+1}</p>
                     <Label htmlFor="reps">Reps</Label>
                     <Input 
                       type='number' 
@@ -166,6 +198,7 @@ function Builder() {
                       name="weight" 
                       onChange={(e) => handleInputChange(e, i)}
                     ></Input>
+                    <Button onClick={() => removeSet(item)}>X</Button>
                   </span>
                 )
               })
@@ -176,6 +209,30 @@ function Builder() {
       </div>
       :
       null
+     }
+
+     {
+      tableState.length < 1 ? null :
+      tableState.map((item) => {
+        console.log(item)
+        return(
+          <div key={item.id} className='flex flex-wrap'>
+            <h1>{item.exerciseName}</h1>
+            {
+              item.listOfExercises.map((set) => {
+                return(
+                <span key={set.id}>
+                  <p >{set.id}</p>
+                  <p >{set.reps}</p>
+                  <p>{set.weight}</p>
+                </span>
+                )
+                
+              })
+            }
+          </div>
+        )
+      })
      }
 
     </div>
