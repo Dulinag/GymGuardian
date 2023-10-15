@@ -20,7 +20,9 @@ export default function Workouts() {
   </div>
   <div className="container mx-auto py-4 flex justify-evenly">
 
-  
+  <Link href="/">
+      <Button size={'lg'}>Home</Button>
+    </Link>
   <Link href="/builder">
       <Button size={'lg'}>Build New Workout</Button>
     </Link>
@@ -31,13 +33,16 @@ export default function Workouts() {
     <Button size={'lg'}>View Our Workouts Video</Button>
 </Link>
 
+<Link href="/calender">
+      <Button size={'lg'}>  Calender    </Button>
+    </Link>
 
 
     </div>
 
     </div>
 
-    <p className="italic hover:not-italic mt-10 container mx-auto py-4 flex justify-evenly text-lg">Scroll Down to Start building muscle and add these to your workouts!</p>
+    <p className="italic hover:not-italic mt-10 container mx-auto py-4 flex justify-evenly text-4xl">Scroll Down to Start building muscle and add these to your workouts! ⬇</p>
 
 
     <Videos/>
