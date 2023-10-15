@@ -5,14 +5,15 @@ import {Workouts} from '../../../data/WorkoutData.js'
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import Link from 'next/link.js'
 import {
     Accordion,
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
   } from "@/components/ui/accordion"
-
-  import Table from '@/components/ui/builder-components/table.jsx'
+import SetBuilder from '@/app/builder/set-builder/page.jsx'
+import Table from '@/components/ui/builder-components/table.jsx'
   
 
   //seperate the state to make it leaner, look into useMemo
@@ -26,10 +27,10 @@ function Builder() {
       exercises: null
   })
   const [tableState, setTableState] = React.useState([])
-  let [exerciseBuilder, setExerciseBuilder] = React.useState({
-    setNumbers: 0,
-    setInfo:[]
-  })
+  // let [exerciseBuilder, setExerciseBuilder] = React.useState({
+  //   setNumbers: 0,
+  //   setInfo:[]
+  // })
 
   const selectExercise = (group) => {
     let exerciseList = state.exercises ? [...state.exercises, group] : group
@@ -43,74 +44,74 @@ function Builder() {
       })
   }
 
-  const addSetAmount = () => {
+  // const addSetAmount = () => {
 
-    let setAmount = exerciseBuilder.setNumbers
-    let modalState = {
-      setNumbers: ++setAmount,
-      setInfo:[
-        ...exerciseBuilder.setInfo,
-        {
-          id: ++setAmount,
-          exercise: state.activeMuscleGroup,
-          reps: 0,
-          weight: 0,
-          notes: null
-        }
-      ]
-    }
-    setExerciseBuilder(modalState)
-  }
+  //   let setAmount = exerciseBuilder.setNumbers
+  //   let modalState = {
+  //     setNumbers: ++setAmount,
+  //     setInfo:[
+  //       ...exerciseBuilder.setInfo,
+  //       {
+  //         id: ++setAmount,
+  //         exercise: state.activeMuscleGroup,
+  //         reps: 0,
+  //         weight: 0,
+  //         notes: null
+  //       }
+  //     ]
+  //   }
+  //   setExerciseBuilder(modalState)
+  // }
 
-  const removeSet = (item) => {
-    let {id} = item
+  // const removeSet = (item) => {
+  //   let {id} = item
 
-    let setInfo = exerciseBuilder.setInfo
-    let setAmount = exerciseBuilder.setNumbers -1
+  //   let setInfo = exerciseBuilder.setInfo
+  //   let setAmount = exerciseBuilder.setNumbers -1
     
     
-    let newSetInfo = setInfo.filter((set) => set.id !== id)
-    let builderState = {
-      setNumbers: setAmount,
-      setInfo: newSetInfo
-    }
+  //   let newSetInfo = setInfo.filter((set) => set.id !== id)
+  //   let builderState = {
+  //     setNumbers: setAmount,
+  //     setInfo: newSetInfo
+  //   }
 
-    setExerciseBuilder(builderState)
+  //   setExerciseBuilder(builderState)
   
-  }
+  // }
 
-  const handleInputChange = (e, index) => {
-    let {name, value} = e.target
+  // const handleInputChange = (e, index) => {
+  //   let {name, value} = e.target
 
-    let tableState = exerciseBuilder.setInfo
+  //   let tableState = exerciseBuilder.setInfo
 
-    tableState[index][name] = value
+  //   tableState[index][name] = value
 
-    setExerciseBuilder({
-      ...exerciseBuilder,
-      setInfo: tableState
-    })
+  //   setExerciseBuilder({
+  //     ...exerciseBuilder,
+  //     setInfo: tableState
+  //   })
 
-  }
+  // }
 
-  const addToTable = (activeExercise) => {
+  // const addToTable = (activeExercise) => {
     
-    let {setInfo} = exerciseBuilder
-    console.log(setInfo)
+  //   let {setInfo} = exerciseBuilder
+  //   console.log(setInfo)
 
-    let exerciseTable = [
-      ...tableState,
-      {
-        id: tableState.length,
-        exerciseName: activeExercise,
-        listOfExercises: setInfo
-      }
-    ]
+  //   let exerciseTable = [
+  //     ...tableState,
+  //     {
+  //       id: tableState.length,
+  //       exerciseName: activeExercise,
+  //       listOfExercises: setInfo
+  //     }
+  //   ]
 
-    setTableState(exerciseTable)
+  //   setTableState(exerciseTable)
     
     
-  }
+  // }
     
 
 //Im grabbing the state from my modal once I submit my changes, I need a useEffect to check that the workoutData 
@@ -149,7 +150,9 @@ function Builder() {
                               }}
                               style={{ cursor: 'pointer' }}
                             >
+                              <Link href={`/builder/set-builder?exercise=${state.activeMuscleGroup}`}>
                                 {item}
+                              </Link>
                             </AccordionContent>
                                   
                             )
@@ -165,52 +168,50 @@ function Builder() {
                 
             }
         </div>
-     {
-      state.activeMuscleGroup ? 
-      <div className="flex flex-col flex-wrap h-auto p-5 m-5 border border-black justify-evenly">
-        <span className='flex justify-evenly'>
-          {state.activeMuscleGroup}
-          <Button onClick={addSetAmount} size="sm">Add Set</Button>
-          <Button onClick={() => addToTable(state.activeMuscleGroup)} size="sm">Save to Workout</Button>
-        </span>
+   
+      
+      {/* // <div className="flex flex-col flex-wrap h-auto p-5 m-5 border border-black justify-evenly">
+      //   <span className='flex justify-evenly'>
+      //     {state.activeMuscleGroup}
+      //     <Button onClick={addSetAmount} size="sm">Add Set</Button>
+      //     <Button onClick={() => addToTable(state.activeMuscleGroup)} size="sm">Save to Workout</Button>
+      //   </span> */}
         
         
-          {
-            exerciseBuilder.setNumbers > 0 ? 
-            exerciseBuilder.setInfo.map((item, i) => {
-                return(
-                  <span key={item.id} className='flex flex-wrap'>
-                    <p>Set Number: {i+1}</p>
-                    <Label htmlFor="reps">Reps</Label>
-                    <Input 
-                      type='number' 
-                      id="reps" 
-                      name="reps" 
-                      min="0"
-                      onChange={(e) => handleInputChange(e, i)}
-                    >
-                      </Input>
-                    <Label htmlFor="weight">Weight</Label>
-                    <Input 
-                      type='number' 
-                      id="weight" 
-                      step="5"
-                      min="0" 
-                      name="weight" 
-                      onChange={(e) => handleInputChange(e, i)}
-                    ></Input>
-                    <Button onClick={() => removeSet(item)}>X</Button>
-                  </span>
-                )
-              })
-            :
-            null
-          }
+  
+      {/* //       exerciseBuilder.setNumbers > 0 ? 
+      //       exerciseBuilder.setInfo.map((item, i) => {
+      //           return(
+      //             <span key={item.id} className='flex flex-wrap'>
+      //               <p>Set Number: {i+1}</p>
+      //               <Label htmlFor="reps">Reps</Label>
+      //               <Input 
+      //                 type='number' 
+      //                 id="reps" 
+      //                 name="reps" 
+      //                 min="0"
+      //                 onChange={(e) => handleInputChange(e, i)}
+      //               >
+      //                 </Input>
+      //               <Label htmlFor="weight">Weight</Label>
+      //               <Input 
+      //                 type='number' 
+      //                 id="weight" 
+      //                 step="5"
+      //                 min="0" 
+      //                 name="weight" 
+      //                 onChange={(e) => handleInputChange(e, i)}
+      //               ></Input>
+      //               <Button onClick={() => removeSet(item)}>X</Button>
+      //             </span>
+      //           )
+      //         })
+      //       :
+      //       null
+      //     }
         
-      </div>
-      :
-      null
-     }
+      // </div> */}
+     
 
      {
       tableState.length < 1 ? null :
